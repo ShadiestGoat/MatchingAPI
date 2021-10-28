@@ -1,4 +1,4 @@
-module shadygoat.eu/BDSMApi
+module shadygoat.eu/MatchingAPI
 
 go 1.17
 

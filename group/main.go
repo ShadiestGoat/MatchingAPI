@@ -1,6 +1,6 @@
 package group
 
-import "shadygoat.eu/BDSMApi/profile"
+import "shadygoat.eu/MatchingAPI/profile"
 
 type Question struct {
 	// UserID

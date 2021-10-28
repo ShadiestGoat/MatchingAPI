@@ -4,8 +4,7 @@ import (
 	"log"
 	"regexp"
 	"strings"
-
-	"shadygoat.eu/BDSMApi/profile"
+	"shadygoat.eu/MatchingAPI/profile"
 )
 
 var ecCompiled *regexp.Regexp
