@@ -5,7 +5,8 @@ func (vote VoteRoot) SureAvg() float64 {
 }
 
 func (vote *VoteRoot) AddVote(Author string, Value float64, groupMembersLen int64) {
-	var extreme bool = false //TODO: 
+	var extreme = Value <= vote.SureAvg() * 0.4 || vote.SureAvg() * 1.6 <= Value
+
 	vote.Votes[Author] = Vote{
 		Value: Value,
 		Extreme: extreme,
@@ -18,4 +19,5 @@ func (vote *VoteRoot) AddVote(Author string, Value float64, groupMembersLen int6
 	} else {
 		vote.Unsure[Author] = 0
 	}
-} 
+}
+

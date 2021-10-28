@@ -89,7 +89,7 @@ func (user Profile) personalityMatch(match Profile) float64 {
 }
 
 func (user Profile) traitMatch(match Profile) float64 {
-	var res float64;
+	var res float64
 	res += math.Abs(match.Data.Traits.Funny			.SureAvg()-user.Preferance.Traits.Funny) * user.Weights.Traits.Funny
 	res += math.Abs(match.Data.Traits.Cute			.SureAvg()-user.Preferance.Traits.Cute) * user.Weights.Traits.Cute
 	res += math.Abs(match.Data.Traits.Kind			.SureAvg()-user.Preferance.Traits.Kind) * user.Weights.Traits.Kind
