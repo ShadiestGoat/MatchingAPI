@@ -89,13 +89,15 @@ func (user Profile) personalityMatch(match Profile) float64 {
 }
 
 func (user Profile) traitMatch(match Profile) float64 {
-	var res = math.Abs(Avg(match.Data.Traits.Funny)-user.Preferance.Traits.Funny) * user.Weights.Traits.Funny
-	res += math.Abs(Avg(match.Data.Traits.Cute)-user.Preferance.Traits.Cute) * user.Weights.Traits.Cute
-	res += math.Abs(Avg(match.Data.Traits.Kind)-user.Preferance.Traits.Kind) * user.Weights.Traits.Kind
-	res += math.Abs(Avg(match.Data.Traits.Intelligence)-user.Preferance.Traits.Intelligence) * user.Weights.Traits.Intelligence
-	res += math.Abs(Avg(match.Data.Traits.Rich)-user.Preferance.Traits.Rich) * user.Weights.Traits.Rich
-	res += math.Abs(Avg(match.Data.Traits.Creative)-user.Preferance.Traits.Creative) * user.Weights.Traits.Creative
-	res += math.Abs(Avg(match.Data.Traits.Maturity)-user.Preferance.Traits.Maturity) * user.Weights.Traits.Maturity
+	var res float64;
+	res += math.Abs(match.Data.Traits.Funny			.SureAvg()-user.Preferance.Traits.Funny) * user.Weights.Traits.Funny
+	res += math.Abs(match.Data.Traits.Cute			.SureAvg()-user.Preferance.Traits.Cute) * user.Weights.Traits.Cute
+	res += math.Abs(match.Data.Traits.Kind			.SureAvg()-user.Preferance.Traits.Kind) * user.Weights.Traits.Kind
+	res += math.Abs(match.Data.Traits.Intelligence	.SureAvg()-user.Preferance.Traits.Intelligence) * user.Weights.Traits.Intelligence
+	res += math.Abs(match.Data.Traits.Rich			.SureAvg()-user.Preferance.Traits.Rich) * user.Weights.Traits.Rich
+	res += math.Abs(match.Data.Traits.Creative		.SureAvg()-user.Preferance.Traits.Creative) * user.Weights.Traits.Creative
+	res += math.Abs(match.Data.Traits.Maturity		.SureAvg()-user.Preferance.Traits.Maturity) * user.Weights.Traits.Maturity
+	// TODO: 
 	var bad float64 = math.Abs(Avg(match.Data.Traits.Annoyingness) - user.Preferance.Traits.Annoyingness)
 	bad += math.Abs(Avg(match.Data.Traits.Creepiness) - user.Preferance.Traits.Creepiness)
 	res -= bad * user.Weights.Major.BadTraits
@@ -104,8 +106,8 @@ func (user Profile) traitMatch(match Profile) float64 {
 
 func (user Profile) hotness(match Profile) float64 {
 	var res float64 = 0
-	var heightDiff = math.Abs(float64(user.Preferance.Looks.Height) - Avg16(match.Data.Looks.Height))
-	var weightDiff = math.Abs(float64(user.Preferance.Looks.Figure) - Avg16(match.Data.Looks.Figure))
+	var heightDiff = math.Abs(float64(user.Preferance.Looks.Height) - match.Data.Looks.Height.SureAvg())
+	var weightDiff = math.Abs(float64(user.Preferance.Looks.Figure) - match.Data.Looks.Figure.SureAvg())
 
 	if heightDiff <= HEIGHT_DIFF {
 		res += (HEIGHT_DIFF - heightDiff) / HEIGHT_DIFF * user.Weights.Looks.Height
@@ -113,10 +115,10 @@ func (user Profile) hotness(match Profile) float64 {
 	if weightDiff <= WEIGHT_DIFF {
 		res += (WEIGHT_DIFF - weightDiff) / WEIGHT_DIFF * user.Weights.Looks.Figure
 	}
-	res += Avg(match.Data.Looks.Face) * user.Weights.Looks.Face
-	res += Avg(match.Data.Looks.Fashion) * user.Weights.Looks.Fashion
-	res += Avg(match.Data.Looks.Muscular) * user.Weights.Looks.Muscular
-	res += Avg(match.Data.Looks.HairCoolness) * user.Weights.Looks.HairCoolness
+	res += match.Data.Looks.Face.SureAvg() * user.Weights.Looks.Face
+	res += match.Data.Looks.Fashion.SureAvg() * user.Weights.Looks.Fashion
+	res += match.Data.Looks.Muscular.SureAvg() * user.Weights.Looks.Muscular
+	res += match.Data.Looks.HairCoolness.SureAvg() * user.Weights.Looks.HairCoolness
 	return res
 }
 

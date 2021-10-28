@@ -18,7 +18,7 @@ type Group struct {
 	Matches map[string]map[string]int8
 }
 
-func (group *Group) AddCache(user profile.User) {//TODO:
+func (group *Group) AddCache(user profile.User) {//TODO: Rename this to EDIT USER!
 	_, ok := group.Matches[user.ID]
 	group.Matches[user.ID] = map[string]int8{}
 	if !ok {

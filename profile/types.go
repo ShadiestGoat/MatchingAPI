@@ -73,34 +73,35 @@ type Traits struct {
 	Rich,
 	Creative,
 	Maturity,
-
+	ego,
 	Annoyingness,
-	Creepiness []VoteFloat
+	Creepiness VoteRoot
 }
 
 type Looks struct {
 	Face,
 	Fashion,
 	Muscular,
-	HairCoolness []VoteFloat
+	HairCoolness VoteRoot
 
 	// Save in CM for wasteline
 	Figure,
 	// Save in CM!
-	Height []VoteInt
+	Height VoteRoot
 }
 
 type Political [2]float64
 
 type VoteRoot struct {
 	Length int16
-	UnsureLength int16
+	SureLength int16
 	Total float64
-	UnsureTotal float64
+	SureTotal float64
 	// USER ID : Vote
-	Votes map[string]Vote
+	Votes map[string]Vote //prevent users from double voting
 	/* USER ID : SCORE 
 		Score is votes for - votes against. A user will be removed from here if their score goes above TODO:
+		Vote score can be 0.5, so its a float32
 	*/
 	Unsure map[string]float32
 }

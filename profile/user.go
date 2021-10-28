@@ -1,5 +1,9 @@
 package profile
 
+import (
+	"time"
+)
+
 type User struct {
 	Name,
 	ID string
@@ -10,6 +14,7 @@ type User struct {
 	DONE_PERSONALITY bool
 	Profile Profile
 	Groups  map[string]GroupSettings
+	UnknownUsers map[string]time.Time
 }
 
 type GroupSettings struct {
